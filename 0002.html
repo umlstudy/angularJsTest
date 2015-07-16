@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="angularSampleApp">
+<body>
+<div ng-controller="SampleCtrl">
+    <button class="btn btn-primary" ng-click="getJoke()">get Joke          
+    </button>
+    <br/>
+    <div class="well">status={{status}} and <br/>
+        <div class="joke" ng-repeat="j in jokes">{{j["joke"]}}</div>
+    </div> 
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-resource.js"></script>
+<script>
+//아래 내용만 있으면 OK
+var app = angular.module('angularSampleApp', []);
+
+app.controller('SampleCtrl', ["$scope","$resource", function($scope,$resource) {
+	joke = {};
+	$scope.getJoke = function() {
+    	Joke = $resource('http://api.icndb.com/jokes/random/:count')
+    	jokes = Joke.get({count: 3}, function() {
+	        	$scope.jokes = jokes.value;
+    		}
+    	});
+	}
+    ]
+);
+
+/*
+app.controller('SampleCtrl', ($scope,$resource) ->
+    joke = {}
+    $scope.getJoke = () ->
+        Joke = $resource('http://api.icndb.com/jokes/random/:count')
+        jokes = Joke.get({count: 3}, () ->
+            $scope.jokes = jokes.value
+        )
+);
+*/
+
+//angular.bootstrap document, ['angularSampleApp']
+</script>
+</body>
+</html>

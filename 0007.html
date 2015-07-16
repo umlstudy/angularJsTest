@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="services" >
+		</div>
+	</body>
+		<script>
+	angular.module("services",[]);
+
+	angular.module("services").
+	    factory("Ken",[
+	        function(){
+	            var Ken = function(){
+	                this.name = "kenshiro";
+	            };
+	            Ken.prototype = {
+	                constructor: Ken,
+	                say: function(){
+	                    return "My name is " + this.name;
+	                }
+	            };
+	            return Ken;
+	        }]);
+
+	angular.module("services").run([
+	    "Ken",
+	    function(Ken){
+	        var ken = new Ken();
+	        console.log( ken.say());
+	    }]);
+	</script>
+</html>

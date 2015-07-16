@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	</head>
+	<body>
+<div ng-app="app" >
+    <div ng-controller="CalculatorCtrl" >
+        {{numData.leftValue}} + 
+        {{numData.rightValue}} = 
+        {{numData.compute()}}
+	    <button ng-click="plusBtnClicked()" >plus1</button>
+    </div>
+</div>
+	</body>
+		<script>
+		angular.module("services",[]);
+		angular.module("controllers",[]);
+		angular.module("app",["controllers","services"]);
+
+		angular.module("services").
+		    factory("NumDataModel",[
+		        function(){
+		            var NumDataModel = function(){
+		                this.leftValue = 10;
+		                this.rightValue = 20;
+		            };
+		            NumDataModel.prototype = {
+		                constructor: NumDataModel,
+		                compute: function(){
+		                    return this.leftValue + this.rightValue;
+		                }
+		            };
+		            return NumDataModel;
+		        }]);
+
+		angular.module("services").
+		    factory("calculatorServ",[
+		        "NumDataModel",
+		        function(NumDataModel){
+		            
+		            var numData = new NumDataModel();
+		            
+		            return {
+		                addLeft : function(){
+		                    numData.leftValue++;
+		                    console.log(numData);
+		                },
+
+		                getNumData: function(){
+		                    return numData;
+		                }
+		            };
+		        }]);
+
+		angular.module("controllers").
+		    controller("CalculatorCtrl",[
+		        "$scope","calculatorServ",
+		        function($scope,calculatorServ){
+		            "use strict";
+		            
+		            $scope.numData = calculatorServ.getNumData();
+		            
+		            $scope.plusBtnClicked = function(){
+		            	calculatorServ.addLeft();
+	                };
+		            
+		    }]);
+	</script>
+</html>

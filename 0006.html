@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="jsTestApp">
+			{{ 1 + 2 }}
+		</div>
+		
+		<div ng-app="">
+			{{ 2 + 2 }}
+		</div>
+		<div ng-app="app">
+			{{ 2 + 3 }}
+		</div>
+		
+		<div ng-app="app2">
+			{{ 2 + 2 }}
+		</div>
+	</body>
+	
+	<script>
+		$(function() {
+			$testApp = $(".jsTestApp");
+			angular.bootstrap($testApp[0]);
+		});
+		angular.module('app2', []);
+		
+		// test
+		angular.module("services",[]);
+		angular.module("controllers",[]);
+		
+		angular.module("app", ["services", "controllers"]);
+		angular.module("controllers").controller("CalculatorCtrl", "$scope", ..)
+	</script>
+</html>

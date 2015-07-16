@@ -1,0 +1,12 @@
+*.o
+*.exe
+bin/
+/TODO # file
+doc/*.txt
+build/
+node_modules/
+*.log
+.gradle/
+.settings/
+/.classpath
+/.project

@@ -1,0 +1,17 @@
+{
+  "name": "angularJsTest",
+  "version": "0.0.0",
+  "authors": [ "sejong <umlstudy@gmail.com>" ],
+  "description": "angularJsTest",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "karma": "1.9.1",
+  }
+}
